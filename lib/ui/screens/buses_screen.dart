@@ -5,65 +5,97 @@ class BusesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GridView.builder(
-          itemCount: 6,
-          shrinkWrap: true,
-          primary: false,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              childAspectRatio: 0.7,
-              crossAxisCount: 2,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5),
-          itemBuilder: (context, index) {
-            return Container(
-              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Color(0xffbccfe0),
-                  borderRadius: BorderRadius.circular(20)),
-              height: 600,
-              width: MediaQuery.of(context).size.width * 0.5,
-              child: Column(
-                children: [
-                  Text('DSC Campus',style: TextStyle(fontSize: 18,color: Colors.black),),
-                  Text('<->',style: TextStyle(fontSize: 18,color: Colors.black),),
-                  Text('Uttara',style: TextStyle(fontSize: 18,color: Colors.black),),
-                  Divider(
-                    color: Colors.black,
-                  ),
-                  Text('Rajanigondha 11',style: TextStyle(fontSize: 18,color: Colors.black),),
-                  SizedBox(height: 10,),
-                  Text('Start time (To DSC):',style: TextStyle(fontSize: 14,color: Colors.black),),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    Text('7:20 AM',style: TextStyle(fontSize: 14,color: Colors.green),),
-                    Text(' 7:20 AM',style: TextStyle(fontSize: 14,color: Colors.green),),
-                    Text(' 7:20 AM',style: TextStyle(fontSize: 14,color: Colors.green),),
-                  ],),
-                  SizedBox(height: 10,),
-                  Text('Departure time (From DSC):',style: TextStyle(fontSize: 14,color: Colors.black),),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('7:20 AM',style: TextStyle(fontSize: 14,color: Colors.green),),
-                      Text(' 7:20 AM',style: TextStyle(fontSize: 14,color: Colors.green),),
-                      Text(' 7:20 AM',style: TextStyle(fontSize: 14,color: Colors.green),),
-                    ],),
-                  SizedBox(height: 10,),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                          foregroundColor: Colors.white,
-                        fixedSize: Size(120, 30)
-                      ),
-                      onPressed: (){}, child: Text('Buy Ticket'))
+    final Size screenSize = MediaQuery.of(context).size;
+    final double padding = screenSize.width * 0.03;
+    final double fontSize = screenSize.width * 0.04;
+    final double chipFontSize = screenSize.width * 0.032;
+    final double titleFontSize = screenSize.width * 0.045;
+    final double buttonHeight = screenSize.height * 0.045;
 
-                ],
-              ),
-            );
-          }),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: EdgeInsets.all(padding),
+        child: GridView.builder(
+          itemCount: 6,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: screenSize.width < 600 ? 2 : 3,
+            crossAxisSpacing: padding,
+            mainAxisSpacing: padding,
+            childAspectRatio: 0.68,
+          ),
+            itemBuilder: (context, index) {
+              return LayoutBuilder(builder: (context, constraints) {
+                final double innerFontSize = constraints.maxWidth * 0.08;
+                final double chipFontSize = constraints.maxWidth * 0.07;
+                final double buttonHeight = constraints.maxHeight * 0.12;
+
+                return Container(
+                  padding: EdgeInsets.all(constraints.maxWidth * 0.05),
+                  decoration: BoxDecoration(
+                    color: const Color(0xffbccfe0),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    children: [
+                      Text('DSC Campus',
+                          style: TextStyle(
+                              fontSize: innerFontSize, color: Colors.black)),
+                      Text('<->',
+                          style: TextStyle(
+                              fontSize: innerFontSize, color: Colors.black)),
+                      Text('Uttara',
+                          style: TextStyle(
+                              fontSize: innerFontSize, color: Colors.black)),
+                      const Divider(color: Colors.black),
+                      Text('Rajanigondha 11',
+                          style: TextStyle(
+                              fontSize: innerFontSize * 0.9, color: Colors.black)),
+                      const SizedBox(height: 6),
+                      Text('Start time (To DSC):',
+                          style: TextStyle(fontSize: chipFontSize)),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 4,
+                        children: const [
+                          Text('7:20 AM', style: TextStyle(fontSize: 12, color: Colors.green)),
+                          Text('7:50 AM', style: TextStyle(fontSize: 12, color: Colors.green)),
+                          Text('8:30 AM', style: TextStyle(fontSize: 12, color: Colors.green)),
+                        ],
+                      ),
+                      const SizedBox(height: 6),
+                      Text('Departure time (From DSC):',
+                          style: TextStyle(fontSize: chipFontSize)),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 4,
+                        children: const [
+                          Text('3:00 PM', style: TextStyle(fontSize: 12, color: Colors.green)),
+                          Text('4:00 PM', style: TextStyle(fontSize: 12, color: Colors.green)),
+                          Text('5:30 PM', style: TextStyle(fontSize: 12, color: Colors.green)),
+                        ],
+                      ),
+                      const Spacer(),
+                      SizedBox(
+                        width: double.infinity,
+                        height: buttonHeight,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            foregroundColor: Colors.white,
+                          ),
+                          onPressed: () {},
+                          child: Text('Buy Ticket', style: TextStyle(fontSize: chipFontSize)),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              });
+            }
+
+        ),
+      ),
     );
   }
 }
