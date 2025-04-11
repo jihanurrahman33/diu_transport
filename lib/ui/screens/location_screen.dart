@@ -7,13 +7,15 @@ class LocationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final point1 = LatLng(23.876589, 90.320788);
+    final point2 = LatLng(23.9004, 90.3272);
 
+    return Scaffold(
       body: FlutterMap(
         mapController: MapController(),
         options: MapOptions(
-          initialCenter: LatLng(23.876589,90.320788),
-          initialZoom: 15,
+          initialCenter: point1,
+          initialZoom: 13,
         ),
         children: [
           TileLayer(
@@ -23,10 +25,25 @@ class LocationScreen extends StatelessWidget {
           MarkerLayer(
             markers: [
               Marker(
-                point: LatLng(23.876589,90.320788),
+                point: point1,
                 width: 40,
                 height: 40,
                 child: Icon(Icons.location_on, color: Colors.red, size: 40),
+              ),
+              Marker(
+                point: point2,
+                width: 40,
+                height: 40,
+                child: Icon(Icons.location_on, color: Colors.red, size: 40),
+              ),
+            ],
+          ),
+          PolylineLayer(
+            polylines: [
+              Polyline(
+                points: [point1, point2],
+                color: Colors.blue,
+                strokeWidth: 4.0,
               ),
             ],
           ),

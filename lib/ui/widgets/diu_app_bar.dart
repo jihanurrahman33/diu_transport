@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../utils/app_string.dart';
 
 class DiuAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const DiuAppBar({super.key,required this.onTapMenuIcon,required this.title});
+  const DiuAppBar({super.key,required this.onTapMenuIcon,required this.title,required this.onTapNotificationIcon});
   final void Function() onTapMenuIcon;
+  final void Function() onTapNotificationIcon;
  final String title;
 
 
@@ -24,7 +25,7 @@ class DiuAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: onTapNotificationIcon,
             icon: Icon(
               Icons.notifications_none_outlined,
               color: Colors.white,

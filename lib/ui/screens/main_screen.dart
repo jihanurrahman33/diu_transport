@@ -3,6 +3,7 @@ import 'package:diu_transport/ui/screens/contact_us_screen.dart';
 import 'package:diu_transport/ui/screens/feedback_screen.dart';
 import 'package:diu_transport/ui/screens/location_screen.dart';
 import 'package:diu_transport/ui/screens/my_profile_screen.dart';
+import 'package:diu_transport/ui/screens/notification_screen.dart';
 import 'package:diu_transport/ui/screens/schedule_screen.dart';
 import 'package:diu_transport/ui/screens/settings_screen.dart';
 import 'package:diu_transport/ui/utils/app_string.dart';
@@ -110,6 +111,7 @@ class _MainScreenState extends State<MainScreen> {
       appBar: DiuAppBar(
         title: navButtons[_selectedIndex],
         onTapMenuIcon: _onTapMenuIcon,
+        onTapNotificationIcon: _onTapNoticationIcon,
       ),
       bottomNavigationBar: NavigationBar(
           selectedIndex: _selectedIndex,
@@ -132,6 +134,10 @@ class _MainScreenState extends State<MainScreen> {
           ]),
       body: _pages[_selectedIndex],
     );
+
+  }
+  void _onTapNoticationIcon(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationScreen()));
   }
 
   void _onTapMenuIcon() {
