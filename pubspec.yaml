@@ -38,6 +38,7 @@ dependencies:
   google_maps_flutter:
   flutter_map:
   latlong2:
+  share_plus:
 
 dev_dependencies:
   flutter_test:

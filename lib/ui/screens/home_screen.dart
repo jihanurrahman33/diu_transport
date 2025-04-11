@@ -8,87 +8,103 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size screenSize = MediaQuery.of(context).size;
+    final double horizontalPadding = screenSize.width * 0.04;
+    final double verticalSpacing = screenSize.height * 0.02;
+
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 40,
-              ),
-              Text(
-                AppString.serviceNeedText,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontSize: 24,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: verticalSpacing),
+                Text(
+                  AppString.serviceNeedText,
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontSize: screenSize.width * 0.06,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  CustomContainer(
-                    containerText: 'Bus Information',
-                    icon: Icons.directions_bus,
+                    color: Colors.black,
                   ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CustomContainer(
-                    containerText: 'My Bookings',
-                    icon: Icons.note_outlined,
-                  ),
-                ],
-              ),
-              Center(
-                child: ListView.builder(
-                    itemCount: 3,
-                    shrinkWrap: true,
-                    primary: false,
-                    itemBuilder: (context,index){
-                  return Card(
-                    margin: EdgeInsets.all(16),
-                    color: Color(0xffEFEFEF),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-        
-                        children: [
-                          Text(
-                            'You Have any ongoing Order',
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'Need a Service today?',
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Colors.black,
-                                fontSize: 18
-                                ,fontWeight: FontWeight.normal
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  fixedSize: Size(180, 40),
-                                  backgroundColor: Theme.of(context).primaryColor,
-                                  foregroundColor: Colors.white),
-                              onPressed: () {},
-                              child: Text('Check Bookings'))
-                        ],
-                      ),
+                ),
+                SizedBox(height: verticalSpacing * 0.8),
+
+                /// Responsive row with wrap fallback
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    CustomContainer(
+                      containerText: 'Bus Information',
+                      icon: Icons.directions_bus,
                     ),
-                  );
-                })
-              )
-            ],
+                    CustomContainer(
+                      containerText: 'My Bookings',
+                      icon: Icons.note_outlined,
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: verticalSpacing),
+
+                /// Card list section
+                ListView.builder(
+                  itemCount: 3,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Card(
+                      margin: EdgeInsets.symmetric(vertical: verticalSpacing),
+                      color: const Color(0xffEFEFEF),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'You Have any ongoing Order',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(color: Colors.black),
+                            ),
+                            SizedBox(height: 6),
+                            Text(
+                              'Need a Service today?',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                color: Colors.black,
+                                fontSize: screenSize.width * 0.045,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Center(
+                              child: SizedBox(
+                                width: screenSize.width * 0.5,
+                                height: 40,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                    Theme.of(context).primaryColor,
+                                    foregroundColor: Colors.white,
+                                  ),
+                                  onPressed: () {},
+                                  child: Text('Check Bookings'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

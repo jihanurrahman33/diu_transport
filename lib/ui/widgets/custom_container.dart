@@ -7,7 +7,7 @@ final IconData icon;
   Widget build(BuildContext context) {
     return Container(
       height: 180,
-      width: 180,
+      width: MediaQuery.of(context).size.width*0.45,
       decoration: BoxDecoration(
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(20)

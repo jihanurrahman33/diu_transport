@@ -6,6 +6,8 @@ import 'package:diu_transport/ui/screens/schedule_screen.dart';
 import 'package:diu_transport/ui/screens/settings_screen.dart';
 import 'package:diu_transport/ui/utils/app_string.dart';
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
+
 
 import '../widgets/diu_app_bar.dart';
 import 'home_screen.dart';
@@ -45,59 +47,61 @@ class _MainScreenState extends State<MainScreen> {
       key: _scaffoldKey,
       drawer: SafeArea(
         child: Drawer(
-          child: Column(
-            children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                ),
-                child: Center(
-                  // Centers the content both vertically and horizontally
-                  child: Column(
-                    mainAxisSize: MainAxisSize
-                        .min, // Shrinks column to its content height
-                    children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.person,
-                          size: 34,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  child: Center(
+                    // Centers the content both vertically and horizontally
+                    child: Column(
+                      mainAxisSize: MainAxisSize
+                          .min, // Shrinks column to its content height
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            size: 34,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                          height:
-                              12), // Vertical spacing between avatar and text
-                      Text(
-                        'Person',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
+                        SizedBox(
+                            height:
+                                12), // Vertical spacing between avatar and text
+                        Text(
+                          'Person',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              ListView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () =>
-                          _onTapDrawerMenuButton(buttons[index]['text']),
-                      leading: Icon(
-                        buttons[index]['icon'],
-                        size: 35,
-                      ),
-                      title: Text(
-                        buttons[index]['text'],
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    );
-                  }),
-            ],
+                ListView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        onTap: () =>
+                            _onTapDrawerMenuButton(buttons[index]['text']),
+                        leading: Icon(
+                          buttons[index]['icon'],
+                          size: 35,
+                        ),
+                        title: Text(
+                          buttons[index]['text'],
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      );
+                    }),
+              ],
+            ),
           ),
         ),
       ),
@@ -161,10 +165,10 @@ class _MainScreenState extends State<MainScreen> {
         Navigator.push(context, MaterialPageRoute(builder: (context)=>FeedbackScreen()));
         break;
       case 'Share':
-        // Show About dialog or page
+        Share.share('Check out this awesome app: https://github.com/jihanurrahman33');
         break;
       case 'Logout':
-        // Navigate to Support
+        Navigator.pop(context);
         break;
 
       default:
