@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../utils/app_string.dart';
 
 class DiuAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const DiuAppBar({super.key,required this.onTapMenuIcon});
+  const DiuAppBar({super.key,required this.onTapMenuIcon,required this.title});
   final void Function() onTapMenuIcon;
+ final String title;
 
 
   @override
@@ -17,7 +18,7 @@ class DiuAppBar extends StatelessWidget implements PreferredSizeWidget {
             color: Colors.white,
           )),
       title: Text(
-        AppString.appName,
+       title,
         style: TextStyle(color: Colors.white),
       ),
       centerTitle: true,

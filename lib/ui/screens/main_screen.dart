@@ -2,6 +2,7 @@ import 'package:diu_transport/ui/screens/buses_screen.dart';
 import 'package:diu_transport/ui/screens/contact_us_screen.dart';
 import 'package:diu_transport/ui/screens/feedback_screen.dart';
 import 'package:diu_transport/ui/screens/location_screen.dart';
+import 'package:diu_transport/ui/screens/my_profile_screen.dart';
 import 'package:diu_transport/ui/screens/schedule_screen.dart';
 import 'package:diu_transport/ui/screens/settings_screen.dart';
 import 'package:diu_transport/ui/utils/app_string.dart';
@@ -20,6 +21,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  List<String> navButtons=['Home','Schedule','Location','Buses','Settings'];
   List<Map<String, dynamic>> buttons = [
     {'icon': Icons.home, 'text': 'Home'},
     {'icon': Icons.person, 'text': 'Profile'},
@@ -106,6 +108,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       appBar: DiuAppBar(
+        title: navButtons[_selectedIndex],
         onTapMenuIcon: _onTapMenuIcon,
       ),
       bottomNavigationBar: NavigationBar(
@@ -143,10 +146,10 @@ class _MainScreenState extends State<MainScreen> {
         setState(() => _selectedIndex = 0);
         break;
       case 'Profile':
-        setState(() => _selectedIndex = 1);
+        setState(() => Navigator.push(context, MaterialPageRoute(builder: (context)=>MyProfileScreen())));
         break;
       case 'Settings':
-        setState(() => _selectedIndex = 2);
+        setState(() => _selectedIndex = 4);
         break;
       case 'Notification':
         setState(() => _selectedIndex = 3);
